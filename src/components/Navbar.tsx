@@ -1,11 +1,17 @@
-import React from 'react'
-import UserProfile from './UserProfile'
+import { useSelector } from 'react-redux'
+import type { RootState } from '../redux/store'
 
 const Navbar = () => {
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
+
   return (
-    <div className="col-span-3 h-20 bg-gray-200 flex items-center justify-center">
-      <UserProfile />
-    </div>
+    <header className="topbar">
+      <div className="breadcrumb"><span>Workspace</span><span className="breadcrumb-slash">/</span>Overview</div>
+      <div className="topbar-status">
+        <span className={`status-dot ${isLoggedIn ? 'status-dot-live' : ''}`} />
+        {isLoggedIn ? 'Session active' : 'Guest session'}
+      </div>
+    </header>
   )
 }
 
